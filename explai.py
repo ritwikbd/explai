@@ -9,7 +9,6 @@ from reportlab.pdfgen import canvas
 from reportlab.lib.units import inch, cm
 from reportlab.lib.utils import ImageReader
 
-from sklearn import datasets
 import matplotlib
 import seaborn as sns
 
@@ -102,22 +101,6 @@ def getDistro(df_y):
     img9.savefig("histPlot.png",bbox_inches='tight')
     t9.remove()
     
-    
-def getLime_clf(df_x,df_y,model):
-    import lime
-    import lime.lime_tabular
-    explainer = lime.lime_tabular.LimeTabularExplainer(df_x.values, feature_names=df_x.columns,class_names=list(df_y.unique()) ,discretize_continuous=True)
-    explanation = explainer.explain_instance(df_x.iloc[0].values, model.predict_proba)
-    feature_importance = explanation.as_list()
-    feats=[]
-    val=[]
-    for item in feature_importance:
-        toks=item[0].split(' ')
-        for tok in toks:
-            if tok in df_x.columns:
-                feats.append(tok)
-                break
-        val.append(abs(item[1]))
 
     
 def classifierReport(df_x,df_y,model,filename="Tesst.pdf"):
