@@ -155,7 +155,7 @@ def classifierReport(df_x,df_y,model,filename="Tesst.pdf"):
     
     feats_df=standardFeatImps(pca,df_x)
     getFeatImps(model,df_x,feats_df)
-    ct.drawString(116,248,'Feature Importance',)
+    ct.drawString(106,248,'Standardised Feature Importance',)
     ct.drawImage("featsBar.png",x=20,y=14,width=250,height=225)
     os.remove("featsBar.png")
     
@@ -236,7 +236,7 @@ def regressorReport(df_x,df_y,model,filename="TesstRef.pdf"):
     
     getFeatImps(model,df_x,feats_df)
     ct.setFont(psfontname='Times-Roman',size=15)
-    ct.drawString(116,248,'Feature Importance',)
+    ct.drawString(106,248,'Standardised Feature Importance',)
     ct.drawImage("featsBar.png",x=20,y=14,width=255,height=225)
     os.remove("featsBar.png")
     
