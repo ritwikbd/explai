@@ -13,7 +13,7 @@ import matplotlib
 import seaborn as sns
 
 import pandas as pd
-matplotlib.pyplot.ticklabel_format(style='plain', axis='y')
+#matplotlib.pyplot.ticklabel_format(style='plain', axis='y')
 
 
 def getPcaPlot(df_x,yval,title,image_name):
@@ -85,7 +85,7 @@ def standardFeatImps(pca,df_x):
 def getFeatImps(model,df_x,df_feats):
     
     t3=sns.barplot(y=df_feats['importance'],x=df_feats['feature'])
-    t3.set_xticklabels(df_feats['feature'],rotation='14')
+    t3.set_xticklabels(df_feats['feature'],rotation=14)
     img3=t3.get_figure()
     img3.savefig("featsBar.png",bbox_inches='tight')
     t3.remove()
