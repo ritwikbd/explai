@@ -1,1 +1,1 @@
-from explai import regressorReport, classifierReport
+from explai.reports import regressorReport, classifierReport
