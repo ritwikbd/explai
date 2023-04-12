@@ -100,10 +100,11 @@ def getDistro(df_y):
     img9=t9.get_figure()
     img9.savefig("histPlot.png",bbox_inches='tight')
     t9.remove()
+    matplotlib.pyplot.close()
     
 
     
-def classifierReport(df_x,df_y,model,filename="Tesst.pdf"):
+def classifierReport(df_x,df_y,model,filename="explaiReport.pdf"):
     
     import os
     preds=model.predict(df_x)
@@ -155,15 +156,15 @@ def classifierReport(df_x,df_y,model,filename="Tesst.pdf"):
     
     feats_df=standardFeatImps(pca,df_x)
     getFeatImps(model,df_x,feats_df)
-    ct.drawString(106,248,'Standardised Feature Importance',)
+    ct.drawString(55,248,'Standardised Feature Importance',)
     ct.drawImage("featsBar.png",x=20,y=14,width=250,height=225)
     os.remove("featsBar.png")
     
     
     getPermFeatImp(df_x, df_y, model)
     ct.drawString(346,248,"Permutation Feature Importance")
-    ct.drawImage("barPlot.png",x=295,y=14,height=225,width=270)
-    os.remove("barPlot.png")
+    ct.drawImage("boxPlot.png",x=295,y=14,height=225,width=270)
+    os.remove("boxPlot.png")
     
     ct.save()
     
@@ -179,15 +180,17 @@ def getEvals_reg(df_y,preds):
 
 def getPermFeatImp(df_x,df_y,model):
     from sklearn.inspection import permutation_importance
+    matplotlib.pyplot.ticklabel_format(style='plain', axis='y')
     result_test = permutation_importance(model, df_x, df_y, n_repeats=20, random_state=42, n_jobs=2)
     sorted_importances_idx_test = result_test.importances_mean.argsort()
     importances_test = pd.DataFrame(result_test.importances[sorted_importances_idx_test].T,columns=df_x.columns[sorted_importances_idx_test],)
-    t9=sns.barplot(data=importances_test, orient='h')
+    t9=sns.boxplot(data=importances_test, orient='h')
     t9.set_xlabel("Importance",fontsize=15)
     t9.set_ylabel("Feature",fontsize=15)
     img9=t9.get_figure()
-    img9.savefig("barPlot.png",bbox_inches='tight')
+    img9.savefig("boxPlot.png",bbox_inches='tight')
     t9.remove()
+    matplotlib.pyplot.close()
 
 
 def getResidual(df_y,preds):
@@ -198,9 +201,10 @@ def getResidual(df_y,preds):
     img8=t8.get_figure()
     img8.savefig("scatterPlot.png",bbox_inches='tight')
     t8.remove()
+    matplotlib.pyplot.close()
 
 
-def regressorReport(df_x,df_y,model,filename="TesstRef.pdf"):
+def regressorReport(df_x,df_y,model,filename="explaiReport.pdf"):
     
     import os
     preds=model.predict(df_x)
@@ -236,7 +240,7 @@ def regressorReport(df_x,df_y,model,filename="TesstRef.pdf"):
     
     getFeatImps(model,df_x,feats_df)
     ct.setFont(psfontname='Times-Roman',size=15)
-    ct.drawString(106,248,'Standardised Feature Importance',)
+    ct.drawString(55,248,'Standardised Feature Importance',)
     ct.drawImage("featsBar.png",x=20,y=14,width=255,height=225)
     os.remove("featsBar.png")
     
@@ -255,8 +259,8 @@ def regressorReport(df_x,df_y,model,filename="TesstRef.pdf"):
     getPermFeatImp(df_x, df_y, model)
     ct.setFont(psfontname='Times-Roman',size=15)
     ct.drawString(346,248,"Permutation Feature Importance")
-    ct.drawImage("barPlot.png",x=295,y=14,height=225,width=270)
-    os.remove("barPlot.png")
+    ct.drawImage("boxPlot.png",x=295,y=14,height=225,width=270)
+    os.remove("boxPlot.png")
     
     
     
