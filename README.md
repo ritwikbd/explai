@@ -1,12 +1,16 @@
 # explai
 A reporting tool for Explainable AI
-</br> Installation:
-</br> pip install explai
 
-</br>
-It has 2 functions:
-</br> classifierReport(df_x,df_y,model,filename) : For classification models
-</br> regressorReport(df_x,df_y,model,filename) : For regression models
+
+## Installation:
+
+```
+pip install explai
+```
+
+## Two main functions are:
+* **classification task**: `classifierReport(df_x,df_y,model,filename)`
+* **regression task**: `regressorReport(df_x,df_y,model,filename)`
 
 </br> df_x and df_y are the x and y of your validation set respectively
 </br> model is the model you have trained
